@@ -1,83 +1,59 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Gatinho Fofo 🐱</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Página Simples e Funcional</title>
   <style>
     body {
-      background-color: #ffebf0;
-      text-align: center;
-      font-family: Comic Sans MS, cursive;
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 10px;
+      background-color: #f4f4f4;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #ccc;
     }
-
-    h1 {
-      color: #ff69b4;
-      font-size: 3em;
-      margin-top: 30px;
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 1rem;
     }
-
-    #gatinho {
-      width: 200px;
-      height: 200px;
-      background-image: url('https://cdn-icons-png.flaticon.com/512/616/616408.png');
-      background-size: cover;
-      margin: 30px auto;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    #gatinho:hover {
-      transform: scale(1.1);
-    }
-
-    #susto {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: black;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-
-    #susto img {
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
+    #msg {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <h1>Clique no gatinho fofo 🐱</h1>
+  <h1>Formulário Simples</h1>
+  <p>Digite seu nome e clique em enviar:</p>
 
-  <div id="gatinho"></div>
+  <form id="myForm">
+    <input type="text" id="name" placeholder="Seu nome" required />
+    <button type="submit">Enviar</button>
+  </form>
 
-  <div id="susto">
-    <img src="https://i.imgur.com/9K7K7gT.jpg" alt="SUSTO">
-  </div>
-
-  <audio id="grito" src="https://www.myinstants.com/media/sounds/wilhelm_scream.mp3"></audio>
+  <div id="msg"></div>
 
   <script>
-    let clique = 0;
-    const gatinho = document.getElementById("gatinho");
-    const susto = document.getElementById("susto");
-    const grito = document.getElementById("grito");
+    const form = document.getElementById('myForm');
+    const msg = document.getElementById('msg');
 
-    gatinho.onclick = () => {
-      clique++;
-      if (clique >= 5) {
-        susto.style.display = "flex";
-        grito.play();
-        setTimeout(() => {
-          location.reload(); // reinicia depois do susto
-        }, 3000);
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // Não deixa a página recarregar
+
+      const name = document.getElementById('name').value.trim();
+      if(name) {
+        msg.textContent = `Olá, ${name}! Obrigado por enviar o formulário.`;
+        form.reset();
+      } else {
+        msg.textContent = 'Por favor, digite seu nome.';
       }
-    };
+    });
   </script>
 
 </body>
